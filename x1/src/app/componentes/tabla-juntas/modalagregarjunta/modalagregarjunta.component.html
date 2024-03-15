@@ -1,0 +1,188 @@
+<div class="modal">
+  <div class="modal-content">
+    <!---2 Link the FormGroup and FormControls to the form -->
+    <!--<form [formGroup]="juntasForm" (ngSubmit)="SaveCustomer()">-->
+    <form [formGroup]="juntasForm" (ngSubmit)="onJuntaCreate()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Agregar Junta</mat-card-title>
+          <mat-card-subtitle>Proyecto: Enelgar</mat-card-subtitle>
+          <mat-card-subtitle>Cliente:Boca Raton</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <!--- Diametros------>
+          <!---Nominal1------>
+          <mat-form-field class="mat-50">
+            <mat-label>nominal</mat-label>
+            <!-- <input matInput> -->
+            <mat-select  formControlName="nominal" >
+              <mat-option [value]="item" *ngFor="let item of nominal1list">{{
+                item
+              }}</mat-option>
+            </mat-select>
+            <mat-error>El campo es obligatorio</mat-error>
+          </mat-form-field>
+
+          <!---Nominal2------>
+          <mat-form-field class="mat-50">
+            <mat-label>Nominal2</mat-label>
+            <!-- <input matInput> -->
+            <mat-select  formControlName="nominal1">
+              <mat-option [value]="item" *ngFor="let item of nominal2list">{{
+                item
+              }}</mat-option>
+            </mat-select>
+            <mat-error>El campo es obligatorio</mat-error>
+          </mat-form-field>
+
+          <!--- linea o sistema------>
+          <div>
+            <mat-form-field class="mat-100">
+              <mat-label>Sistema</mat-label>
+              <!-- <input matInput> -->
+              <mat-select formControlName="lineaOSistema">
+                <mat-option [value]="item" *ngFor="let item of sistemalist">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+              <mat-error>El campo es obligatorio</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!--- Especificación------>
+          <mat-form-field class="mat-50">
+            <mat-label>Especificacion</mat-label>
+            <!-- <input matInput> -->
+            <mat-select formControlName="especificacion">
+              <mat-option
+                [value]="item"
+                *ngFor="let item of especificacionlist"
+                >{{ item }}</mat-option
+              >
+            </mat-select>
+
+            <mat-error>El campo es obligatorio</mat-error>
+          </mat-form-field>
+
+          <!--- Datos del Material------>
+
+          <!--- Shedule------>
+          <mat-form-field class="mat-50">
+            <mat-label>Schedule</mat-label>
+            <!-- <input matInput> -->
+            <mat-select formControlName="schedule">
+              <mat-option [value]="item" *ngFor="let item of schedulelist">{{
+                item
+              }}</mat-option>
+            </mat-select>
+            <mat-error>El campo es obligatorio</mat-error>
+
+          </mat-form-field>
+
+          <!--- Tipo Extremo------>
+          <mat-form-field class="mat-50">
+            <mat-label>Tipo_Extremo</mat-label>
+            <!-- <input matInput> -->
+            <mat-select formControlName="tipo_extremos">
+              <mat-option [value]="item" *ngFor="let item of tipoextremolist">{{
+                item
+              }}</mat-option>
+            </mat-select>
+            <mat-error>El campo es obligatorio</mat-error>
+
+          </mat-form-field>
+
+          <!--- Tipo Material------>
+          <mat-form-field class="mat-50">
+            <mat-label>Tipo_Material</mat-label>
+            <!-- <input matInput> -->
+            <mat-select formControlName="tipo_material">
+              <mat-option
+                [value]="item"
+                *ngFor="let item of tipomateriallist"
+                >{{ item }}</mat-option
+              >
+            </mat-select>
+            <mat-error>El campo es obligatorio</mat-error>
+
+          </mat-form-field>
+
+          <!--- Material------>
+          <mat-form-field class="mat-50">
+            <mat-label>Material</mat-label>
+            <!-- <input matInput> -->
+            <mat-select formControlName="material">
+              <mat-option [value]="item" *ngFor="let item of materiallist">{{
+                item
+              }}</mat-option>
+            </mat-select>
+            <mat-error>El campo es obligatorio</mat-error>
+          </mat-form-field>
+
+          <!--- Pulgadas Diametrales Contabilizadas------>
+
+          <mat-form-field class="mat-50">
+            <mat-label>PulgadasDiametralesContabilizadas</mat-label>
+            <input
+              matInput
+              formControlName="diam_inch_contabilizadas"
+            />
+            <mat-error>El campo es obligatorio</mat-error>
+          </mat-form-field>
+
+          <!--- Pulgadas Diametrales ------>
+
+          <!--- Factor Pulgadas Diametrales ------>
+          <mat-form-field class="mat-50">
+            <mat-label>Factor_Pulgadas_Diametrales</mat-label>
+            <!-- <input matInput> -->
+            <mat-select formControlName="factor_pulgadas_diametrales">
+              <mat-option
+                [value]="item"
+                *ngFor="let item of factor_pulgadas_diametrales"
+                >{{ item }}</mat-option
+              >
+            </mat-select>
+            <mat-error>El campo es obligatorio</mat-error>
+
+          </mat-form-field>
+
+          <!--- Pulgadas Diametrales ------>
+          <mat-form-field class="mat-50">
+            <mat-label>Pulgadas_Diametrales</mat-label>
+            <input matInput formControlName="pulgadas_diametrales" />
+            <mat-error>El campo es obligatorio</mat-error>
+
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-card-actions>
+          <div style="margin: 2%; text-align: right">
+            <button
+              mat-raised-button
+              color="accen"
+              type="submit"
+              (click)="notificarPadreJunta(true)"
+            >
+              Cerrar
+            </button>
+            <!--button mat-raised-button type="submit" color="primary">-->
+            <button mat-raised-button  type="submit"  color="primary"   [disabled]="!juntasForm.valid || !juntasForm.value.nominal || !juntasForm.value.nominal1 || !juntasForm.value.lineaOSistema || !juntasForm.value.especificacion || !juntasForm.value.schedule || !juntasForm.value.tipo_extremos || !juntasForm.value.tipo_material || !juntasForm.value.material || !juntasForm.value.diam_inch_contabilizadas || !juntasForm.value.factor_pulgadas_diametrales || !juntasForm.value.pulgadas_diametrales">
+
+              Guardar
+            </button>
+            <!--<button type="submit" color="primary" [disabled]="!juntasForm.valid">Guardar</button>-->
+
+            <!---<button mat-raised-button color="warn" (click)="clearform()">
+              Limpiar
+            </button>-->
+
+          </div>
+          </mat-card-actions>
+        </mat-card-footer>
+      </mat-card>
+    </form>
+    <!--3-Handle update to the form-->
+
+  </div>
+</div>
