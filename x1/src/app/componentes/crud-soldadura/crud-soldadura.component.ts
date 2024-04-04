@@ -27,6 +27,9 @@ import { ModalSoldaduraComponent } from './modal-soldadura/modal-soldadura.compo
 //IMPORTA EL COMPONENTE MODAL PARA GENERAR CODIGO QR
 import { GenerarQrComponent } from './generar-qr/generar-qr.component';
 
+//IMPORTA EL COMPONENTE MODAL PARA EDITAR SOLDADURA
+import { EditarSoldaduraComponent } from './editar-soldadura/editar-soldadura.component';
+
 import { MatDialog } from '@angular/material/dialog'; //Cuadro de dialogo
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'; //
 
@@ -52,6 +55,7 @@ import { DatasoldaduraService } from '../../services/soldaduradata/datasoldadura
     ModalSoldaduraComponent,
     GenerarQrComponent,
     ReactiveFormsModule,
+    EditarSoldaduraComponent
   ],
 
   templateUrl: './crud-soldadura.component.html',
@@ -73,6 +77,7 @@ export class CrudSoldaduraComponent {
   private isSoldadorSelected: boolean = true; // Variable para controlar el estado de la junta seleccionada
   showModalAgregarSoldadores: boolean = false; // Variable para controlar la visibilidad del componente modal
   showModalGenerarCodigoQR: boolean = false; // Variable para controlar la visibilidad del componente modal Generar Código Qr
+  showModalEditarSoldadura: boolean = false; // Variable para controlar la visibilidad del componente para editar la soldadura
   messageText: string = ''; // Variable para el texto del mensaje de confirmacin
   idSoldaduraPadre: string = ''; // ID del registro que se enviará al componente hijo (modal)
   toDestroy: boolean = false; // Variable para controlar el ciclo de vida del componente hijo (modal)
@@ -254,11 +259,21 @@ Metodo para obtener el ID de la Soldadura seleccionada
 
 obtenerIdDelRegistro(valor: string): void {
   this.showModalGenerarCodigoQR = true; // Mostrar el componente modal
-  // Lógica para obtener el ID del registro, por ejemplo, a través de una interacción del usuario
+  // Lógica para obtener el ID del registro, por ejemplo, a través de una interacción del usuariog
   this.idSoldaduraPadre = valor; // Asigna el ID del registro obtenido
   console.log('IdSoldadura',this.idSoldaduraPadre);
 }
 
+  /*
+**********************************************************************************
+Metodo para obtener el ID de la Soldadura seleccionada para editar la Soldadura
+**********************************************************************************
+*/
+
+mostrarFormularioEditarSoldadura(valor: string): void{
+  this.showModalEditarSoldadura = true;
+  this.idSoldaduraPadre = valor; // Asigna el ID del registro obtenido
+}
 
 
 
@@ -321,11 +336,23 @@ para encapsular la lógica del cuadro de diálogo en un componente separado (Box
   recibirDatosdeMA2(event: boolean) {
     if (event) {
       this.showModalGenerarCodigoQR = false; // Ocultamos el modal del formulario qr
-      console.log('Se recibieron los datos del componente hijo y se oculto el modal del formulario qr',event);
   }
   }
 
 
+
+
+/*
+*********************************************************************************************************************************
+ recibo datos del componente hijo: editar-soldadura
+**********************************************************************************************************************************
+*/
+
+recibirDatosdelHijoEditarSoldadura(event: boolean) {
+
+    this.showModalEditarSoldadura = false; // Ocultamos el modal del formulario editar soldadura
+
+}
 
 
 /*

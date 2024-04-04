@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Soldadura } from '../../data/soldadura/soldadura.interface.qrcode'; // importa el modelo de la soldadura 
+import { Soldadura } from '../../data/soldadura/soldadura.interface.qrcode'; // importa el modelo de la soldadura
 import { environment } from '../../../environments/environment';  //importa el archivo environment para obtener la url de la api
 //importa ApiUrl
 
@@ -34,6 +34,7 @@ export class SoldaduraService {
     return this.http.delete<Soldadura>(`${environment.apiUrl}/${id}`);
   }
 
+  //Crea la Soldadura
 
   onCreateSoldadura(Soldadura: {
     nro_junta: string;
@@ -58,5 +59,27 @@ export class SoldaduraService {
     }
   }
 
+  //Actualiza nhla Soldadura
+
+  onUpdateSoldadura(id: string, Soldadura: {
+    nro_junta: string;
+    tipo: string;
+    plano: string;
+    hoja: string;
+    revision: string;
+    area: string;
+    fase: string;
+    linea: string;
+    diametro: string;
+    espesor: string;
+    cedula: string;
+    pn1: string;
+    pn2: string;
+    wps: string;
+
+
+  }): Observable<Soldadura> {
+    return this.http.put<Soldadura>(`${environment.apiUrl}/${id}`, Soldadura);
+  }
 
 }

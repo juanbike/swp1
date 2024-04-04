@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { SoldaduraService } from './soldadura.service';
 import { CreateSoldaduraDto } from './dto/create-soldadura.dto';
 import { UpdateSoldaduraDto } from './dto/update-soldadura.dto';
@@ -30,9 +30,9 @@ export class SoldaduraController {
   }
 
   //Actualiza una sola soldadura
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSoldaduraDto: UpdateSoldaduraDto) {
-    return this.soldaduraService.update(+id, updateSoldaduraDto);
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() updateSoldaduraDto: UpdateSoldaduraDto): Promise<Soldadura> {
+    return this.soldaduraService.update(id, updateSoldaduraDto);
   }
 
   //Elimina una sola soldadura

@@ -138,7 +138,7 @@
 
           <!--Disable alerts-->
           <button mat-menu-item>
-            <mat-icon> border_color</mat-icon>
+            <mat-icon color="warn" (click)="mostrarFormularioEditarSoldadura(row.id)" > border_color</mat-icon>
             <span>Editar Registro</span>
           </button>
         </mat-menu>
@@ -198,6 +198,19 @@
   </div>
   }
 </div>
+
+<!--Modal para editar la soldadura
+-->
+
+@if(showModalEditarSoldadura){
+<div>
+  <app-editar-soldadura
+  idSoldaduraHijo="{{ idSoldaduraPadre }}"
+  (miEventoAlPadreCrudSoldadura)="recibirDatosdelHijoEditarSoldadura($event)"
+  ></app-editar-soldadura>
+</div>
+
+}
 
 <!--
 @if(showConfirmDeleteComponent){
