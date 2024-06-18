@@ -30,6 +30,8 @@ export class SoldadoresService {
     nuevoSoldador.calificacion = createSoldadoreDto.calificacion;
     nuevoSoldador.basemetal = createSoldadoreDto.basemetal;
     nuevoSoldador.numerop = createSoldadoreDto.numerop;
+    nuevoSoldador.email = createSoldadoreDto.email;
+    nuevoSoldador.telefono = createSoldadoreDto.telefono;
 
     return await this.soldadoresRepository.save(nuevoSoldador);
   }

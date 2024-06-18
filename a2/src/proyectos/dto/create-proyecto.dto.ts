@@ -6,7 +6,7 @@ export class CreateProyectoDto {
   @IsString({
     message: 'El campo "nombreProyecto" debe ser una cadena de texto',
   })
-  nombreProyecto: string;
+  proyecto: string;
 
   @IsNotEmpty({ message: 'El campo "cliente" no puede estar vacío' })
   @IsString({ message: 'El campo "cliente" debe ser una cadena de texto' })

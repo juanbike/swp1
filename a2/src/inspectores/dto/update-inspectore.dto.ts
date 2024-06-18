@@ -12,7 +12,7 @@ export class updateInspectoreDto extends PartialType(CreateInspectoreDto) {
   
   @IsNotEmpty({ message: 'El campo Apellido no puede estar vacio' })
   @IsString()
-  Apellido: string;
+  apellido: string;
 
   
   @IsNotEmpty({ message: 'El campoTelefono no puede estar vacio' })

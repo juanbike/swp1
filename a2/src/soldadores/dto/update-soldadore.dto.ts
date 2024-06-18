@@ -37,6 +37,13 @@ export class UpdateSoldadoreDto extends PartialType(CreateSoldadoreDto) {
   @IsString()
   numerop: string;
 
+  @IsNotEmpty({ message: 'El campoTelefono no puede estar vacio' })
+  @IsString()
+  telefono: string;
+
+  @IsNotEmpty({ message: 'El campo Email no puede estar vacio' })
+  @IsString()
+  email: string;
  
 
 

@@ -10,6 +10,7 @@ import { dataSourceOptions } from './db/data-source';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { PerfilesModule } from './perfiles/perfiles.module';
 import { SoldaduraModule } from './soldadura/soldadura.module';
+import { MaterialesModule } from './materiales/materiales.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
@@ -22,6 +23,7 @@ import { SoldaduraModule } from './soldadura/soldadura.module';
     UsuariosModule,
     PerfilesModule,
     SoldaduraModule,
+    MaterialesModule,
     
   ],
   controllers: [],

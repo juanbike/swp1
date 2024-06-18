@@ -1,4 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing';
+/* eslint-disable prettier/prettier */
+UUimport { Test, TestingModule } from '@nestjs/testing';
 import { ProyectosController } from './proyectos.controller';
 import { ProyectosService } from './proyectos.service';
 

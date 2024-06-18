@@ -19,7 +19,7 @@ export class Proyecto {
   @Column({ length: 70 })
   @IsNotEmpty({ message: 'El campo "nombreProyecto" no puede estar vacío' })
   @IsString({ message: 'El campo "nombreProyecto" debe ser una cadena de texto' })
-  nombreProyecto: string;
+  proyecto: string;
 
   @Column('text', { nullable: true })
   @Column({ length: 70 })

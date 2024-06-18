@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateProyectoDto } from './create-proyecto.dto';
 import { IsNotEmpty, IsString } from 'class-validator';
@@ -5,7 +6,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class UpdateProyectoDto extends PartialType(CreateProyectoDto) {
   @IsNotEmpty()
   @IsString()
-  nombreProyecto: string;
+  proyecto: string;
 
   @IsNotEmpty()
   @IsString()

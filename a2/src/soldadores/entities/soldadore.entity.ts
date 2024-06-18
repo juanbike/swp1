@@ -38,7 +38,13 @@ export class Soldadore {
 
   @Column({ name: 'numerop', length: 25, nullable: false })
   numerop: string;
+
+  @Column({ name: 'telefono', length: 25, nullable: false })
+  telefono: string;
   
+  @Column({ name: 'email', length: 70, nullable: false })
+  email: string;
+
   @CreateDateColumn({ name: 'create_at' })
   createdAt: Date;
   
