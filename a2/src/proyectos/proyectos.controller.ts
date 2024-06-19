@@ -10,7 +10,8 @@ import {
   HttpException,
   HttpStatus,
   UseInterceptors,
-  UploadedFile
+  UploadedFile,
+  Logger
 } from '@nestjs/common';
 import { ProyectosService } from './proyectos.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -23,6 +24,8 @@ import { extname } from 'path';
 
 @Controller('api/proyectos')
 export class ProyectosController {
+  private readonly logger = new Logger(ProyectosController.name);
+
   constructor(private readonly proyectosService: ProyectosService) {}
 
   //Creamos un proyecto
@@ -40,7 +43,7 @@ export class ProyectosController {
 
   //Recuperamos un proyecto por su Id
   @Get(':id')
-  findById(@Param('id') id: number): Promise<Proyecto> {
+  findById(@Param('id') id: string): Promise<Proyecto> {
     return this.proyectosService.findById(id);
   }
 
@@ -50,13 +53,13 @@ export class ProyectosController {
     @Param('id') id: string,
     @Body() updateInspectoreDto: UpdateProyectoDto,
   ) {
-    return this.proyectosService.update(+id, updateInspectoreDto);
+    return this.proyectosService.update(id, updateInspectoreDto);
   }
 
   // Eliminar un proyecto por su Id
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.proyectosService.remove(+id);
+    return this.proyectosService.remove(id);
   }
 
 
@@ -126,8 +129,20 @@ catch (error) { ... }: Si ocurre un error, lanza una excepción HTTP con estado 
 
   //Elimina todos los proyectos
 
+ 
   @Delete()
-  deleteAllProyectos() {
-    this.proyectosService.deleteAllProyects();
+  async deleteAllData() {
+    this.logger.log('Received request to delete all data');
+    try {
+      await this.proyectosService.deleteAllData();
+      this.logger.log('All data deleted successfully');
+      return { message: 'Todos los datos han sido eliminados' };
+    } catch (error) {
+      this.logger.error('Error deleting all data', error.stack);
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: 'No se pudieron eliminar los datos',
+      }, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

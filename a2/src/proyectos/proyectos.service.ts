@@ -4,6 +4,7 @@ import {
   NotFoundException,
   HttpException,
   HttpStatus,
+  Logger
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { validate } from 'class-validator';
@@ -17,6 +18,7 @@ import * as path from 'path';
 
 @Injectable()
 export class ProyectosService {
+  private readonly logger = new Logger(ProyectosService.name);
   constructor(
     @InjectRepository(Proyecto)
     private readonly proyectosRepository: Repository<Proyecto>,
@@ -53,7 +55,7 @@ export class ProyectosService {
 
   //Recuperamos un proyecto por su Id
 
-  async findById(id: number): Promise<Proyecto> {
+  async findById(id: string): Promise<Proyecto> {
     const proyecto = await this.proyectosRepository.findOneBy({ id: id });
 
     if (!proyecto) {
@@ -68,7 +70,7 @@ export class ProyectosService {
   //Actualizamos un proyecto
 
   async update(
-    id: number,
+    id: string,
     UpdateProyectoDto: Partial<Proyecto>,
   ): Promise<Proyecto> {
     const proyecto = await this.proyectosRepository.findOneBy({ id: id });
@@ -86,7 +88,7 @@ export class ProyectosService {
   }
 
   // Eliminar un proyecto por su Id
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     const proyecto = await this.proyectosRepository.findOneBy({ id: id });
 
     if (!proyecto) {
@@ -141,7 +143,14 @@ g
 
 
   //Elimina todos los proyectos
-  async deleteAllProyects(): Promise<void> {
-    await this.proyectosRepository.delete({});
+  async deleteAllData(): Promise<void> {
+    this.logger.log('Attempting to delete all data');
+    try {
+      await this.proyectosRepository.clear();
+      this.logger.log('All data deleted successfully');
+    } catch (error) {
+      this.logger.error('Error deleting data', error.stack);
+      throw error;
+    }
   }
 }

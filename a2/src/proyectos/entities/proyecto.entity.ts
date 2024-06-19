@@ -10,10 +10,10 @@ import {
   IsString,
   
 } from 'class-validator';
-@Entity({ name:'proyectos' })
+@Entity({name: 'proyectos'})
 export class Proyecto {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column('text', { nullable: true })
   @Column({ length: 70 })
