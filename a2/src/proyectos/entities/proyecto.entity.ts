@@ -13,7 +13,7 @@ import {
 @Entity({name: 'proyectos'})
 export class Proyecto {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column('text', { nullable: true })
   @Column({ length: 70 })

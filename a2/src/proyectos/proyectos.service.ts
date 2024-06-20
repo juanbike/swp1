@@ -55,7 +55,7 @@ export class ProyectosService {
 
   //Recuperamos un proyecto por su Id
 
-  async findById(id: string): Promise<Proyecto> {
+  async findById(id: number): Promise<Proyecto> {
     const proyecto = await this.proyectosRepository.findOneBy({ id: id });
 
     if (!proyecto) {
@@ -70,7 +70,7 @@ export class ProyectosService {
   //Actualizamos un proyecto
 
   async update(
-    id: string,
+    id: number,
     UpdateProyectoDto: Partial<Proyecto>,
   ): Promise<Proyecto> {
     const proyecto = await this.proyectosRepository.findOneBy({ id: id });
@@ -88,7 +88,7 @@ export class ProyectosService {
   }
 
   // Eliminar un proyecto por su Id
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     const proyecto = await this.proyectosRepository.findOneBy({ id: id });
 
     if (!proyecto) {

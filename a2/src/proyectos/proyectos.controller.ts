@@ -43,14 +43,14 @@ export class ProyectosController {
 
   //Recuperamos un proyecto por su Id
   @Get(':id')
-  findById(@Param('id') id: string): Promise<Proyecto> {
+  findById(@Param('id') id: number): Promise<Proyecto> {
     return this.proyectosService.findById(id);
   }
 
   //Actualizamos un proyecto
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateInspectoreDto: UpdateProyectoDto,
   ) {
     return this.proyectosService.update(id, updateInspectoreDto);
@@ -58,7 +58,7 @@ export class ProyectosController {
 
   // Eliminar un proyecto por su Id
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.proyectosService.remove(id);
   }
 
