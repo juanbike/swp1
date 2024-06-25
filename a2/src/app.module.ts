@@ -11,6 +11,11 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { PerfilesModule } from './perfiles/perfiles.module';
 import { SoldaduraModule } from './soldadura/soldadura.module';
 import { MaterialesModule } from './materiales/materiales.module';
+import { TsLineaModule } from './ts_linea/ts_linea.module';
+import { TsMaterialModule } from './ts_material/ts_material.module';
+import { TsTipoExtremoModule } from './ts_tipo-extremo/ts_tipo-extremo.module';
+import { TsTipoMaterialModule } from './ts_tipo-material/ts_tipo-material.module';
+import { TsEspecificacionModule } from './ts_especificacion/ts_especificacion.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
@@ -24,6 +29,11 @@ import { MaterialesModule } from './materiales/materiales.module';
     PerfilesModule,
     SoldaduraModule,
     MaterialesModule,
+    TsLineaModule,
+    TsMaterialModule,
+    TsTipoExtremoModule,
+    TsTipoMaterialModule,
+    TsEspecificacionModule,
     
   ],
   controllers: [],
