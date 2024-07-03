@@ -39,9 +39,7 @@ export class CreateJuntaDto {
   @IsString()
   observaciones: string;
 
-  @IsNumber({}, { message: 'schedule debe ser un  número entero' })
-  schedule: number;
-
+ 
   @IsNumber({}, { message: 'proyectoId debe ser un  número entero' })
   proyectoID: number;
 
