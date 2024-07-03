@@ -17,6 +17,7 @@ import { TsTipoExtremoModule } from './ts_tipo-extremo/ts_tipo-extremo.module';
 import { TsTipoMaterialModule } from './ts_tipo-material/ts_tipo-material.module';
 import { TsEspecificacionModule } from './ts_especificacion/ts_especificacion.module';
 import { TsScheduleModule } from './ts_schedule/ts_schedule.module';
+import { TsMainJuntaModule } from './ts-main-junta/ts-main-junta.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
@@ -36,6 +37,7 @@ import { TsScheduleModule } from './ts_schedule/ts_schedule.module';
     TsTipoMaterialModule,
     TsEspecificacionModule,
     TsScheduleModule,
+    TsMainJuntaModule,
     
   ],
   controllers: [],

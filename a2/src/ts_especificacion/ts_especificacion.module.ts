@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { TsEspecificacionService } from './ts_especificacion.service';
 import { TsEspecificacionController } from './ts_especificacion.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TsEspecificacion } from './entities/ts_especificacion.entity';
+import { TsEspecificacion } from '../ts_especificacion/entities/ts_especificacion.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TsEspecificacion])],

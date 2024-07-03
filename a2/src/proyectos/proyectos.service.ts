@@ -47,6 +47,8 @@ export class ProyectosService {
     return await this.proyectosRepository.save(nuevoProyecto);
   }
 
+  
+
   //Recuperamos todos los proyectos
 
   async findAll(): Promise<Proyecto[]> {

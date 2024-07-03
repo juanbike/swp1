@@ -12,7 +12,7 @@ import {
 import { InspectoresService } from './inspectores.service';
 import { CreateInspectoreDto } from './dto/create-inspectore.dto';
 
-import { Inspectores } from './entities/inspectore.entity'
+import { Inspector } from './entities/inspectore.entity'
 import { updateInspectoreDto } from './dto/update-inspectore.dto';
 
 @Controller('api/inspectores/')
@@ -34,7 +34,7 @@ export class InspectoresController {
 
   // Recuperamos un inspector por su id
   @Get(':id')
-  findById(@Param('id') id: number): Promise<Inspectores> {
+  findById(@Param('id') id: number): Promise<Inspector> {
     return this.inspectoresService.findById(id);
   }
 

@@ -6,13 +6,12 @@ import { CreateJuntaDto } from './dto/create-junta.dto';
 //import { UpdateJuntaDto } from './dto/update-junta.dto';
 import { Junta } from './entities/junta.entity';
 
-@Injectable()
-export class JuntasService {
   constructor(
-    @InjectRepository(Junta)
+ww
+    @InjectRepository(Junta)w
     private readonly juntaRepository: Repository<Junta>,
   ) {}
-
+w
  
   //Creamos una junta
 
@@ -29,8 +28,7 @@ export class JuntasService {
     nuevaJunta.diam_inch_contabilizadas = createJuntaDto.diam_inch_contabilizadas;
     nuevaJunta.factor_pulgadas_diametrales = createJuntaDto.factor_pulgadas_diametrales;
     nuevaJunta.pulgadas_diametrales = createJuntaDto.pulgadas_diametrales;
-    nuevaJunta.proyectID = createJuntaDto.proyectID;
-    nuevaJunta.usuarioID = createJuntaDto.usuarioID;
+  
 
 
 

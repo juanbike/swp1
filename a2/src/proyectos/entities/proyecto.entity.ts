@@ -4,21 +4,28 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  ManyToMany,
+   JoinTable,
+   OneToMany
 } from 'typeorm';
 import {
   IsNotEmpty,
   IsString,
   
 } from 'class-validator';
+
+import { Junta } from '../../juntas/entities/junta.entity';
+import { Inspector } from '../../inspectores/entities/inspectore.entity';
+
+
 @Entity({name: 'proyectos'})
 export class Proyecto {
   @PrimaryGeneratedColumn()
   id: number;
-
   @Column('text', { nullable: true })
   @Column({ length: 70 })
-  @IsNotEmpty({ message: 'El campo "nombreProyecto" no puede estar vacío' })
-  @IsString({ message: 'El campo "nombreProyecto" debe ser una cadena de texto' })
+  @IsNotEmpty({ message: 'El campo "Proyecto" no puede estar vacío' })
+  @IsString({ message: 'El campo "Proyecto" debe ser una cadena de texto' })
   proyecto: string;
 
   @Column('text', { nullable: true })
@@ -53,4 +60,23 @@ export class Proyecto {
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
+
+  //Relaciones unos a muchos: UN PROYECTO TIENE MUCHOS INSPECTORES
+  @ManyToMany(() => Inspector, inspector => inspector.proyectos)
+  @JoinTable({
+    name: 'proyecto2_inspectores2',
+    joinColumn: {
+      name: 'proyecto_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'inspector_id',
+      referencedColumnName: 'id',
+    },
+  })
+  inspectores: Inspector[];
+
+  @OneToMany(() => Junta, junta => junta.proyectoID)
+  juntas: Junta[];
+
 }

@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { Junta } from 'src/juntas/entities/junta.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -6,6 +7,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
+    OneToMany,
   } from 'typeorm';
   
   @Entity({ name:'soldadores' })
@@ -53,5 +55,8 @@ export class Soldadore {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
+
+  @OneToMany(() => Junta, junta => junta.soldadorID)
+  juntas: Junta[];
 
 }

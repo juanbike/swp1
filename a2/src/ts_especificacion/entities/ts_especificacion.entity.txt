@@ -4,26 +4,22 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
-    OneToMany,
   } from 'typeorm';
   import {
     IsNotEmpty,
     IsString,
     
   } from 'class-validator';
-import { Junta } from '../../juntas/entities/junta.entity';
-  @Entity({name: 'Linea'})
-
-
-export class TsLinea {
+  @Entity({name: 'especificacion'})
+export class TsEspecificacion {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column('text', { nullable: true })
-    @Column({ length: 80 })
-    @IsNotEmpty({ message: 'El campo "Linea" no puede estar vacío' })
-    @IsString({ message: 'El campo "Linea" debe ser una cadena de texto' })
-    linea: string;
+    @Column({ length: 10 })
+    @IsNotEmpty({ message: 'El campo "Especificación" no puede estar vacío' })
+    @IsString({ message: 'El campo "Especificación" debe ser una cadena de texto' })
+    especificacion: string;
   
     @Column('text', { nullable: true })
     @Column({ length: 30 })
@@ -34,9 +30,4 @@ export class TsLinea {
     
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
-
-  // Una linea tiene muchas juntas
-  @OneToMany(() => Junta, junta => junta.lineaID)
-  juntas: Junta[];
-
 }

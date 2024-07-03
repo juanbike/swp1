@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Proyecto } from '../../proyectos/entities/proyecto.entity';
-import { Junta } from '../../juntas/entities/junta.entity';
+//import { Proyecto } from '../../proyectos/entities/proyecto.entity';
+//import { Junta } from '../../juntas/entities/junta.entity';
 
 import {
   Entity,
@@ -9,12 +9,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   UpdateDateColumn,
-  ManyToMany, 
- OneToMany
+  //ManyToMany,
+  //JoinTable,
+  //OneToMany
 } from 'typeorm';
 
-@Entity({ name: 'inspectores' })
-export class Inspector {
+@Entity({ name: 'inspector' })
+export class Inspectores {
  
   @PrimaryGeneratedColumn()
   id: number;
@@ -42,14 +43,23 @@ export class Inspector {
   deletedAt: string;
 
 
-  //Relaciones Muchos a Muchos: Un inspector puede estar en muchos proyectos
-  
+  /*
   @ManyToMany(() => Proyecto, proyecto => proyecto.inspectores)
-  
+  @JoinTable({
+    name: 'proyecto_inspectores',
+    joinColumn: {
+      name: 'proyecto_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'inspector_id',
+      referencedColumnName: 'id',
+    },
+  })
   proyectos: Proyecto[];
-  
-  @OneToMany(() => Junta, junta => junta.inspectorID)
+
+  @OneToMany(() => Junta, junta => junta.inspector)
   juntas: Junta[];
-  
+  */
 
 }

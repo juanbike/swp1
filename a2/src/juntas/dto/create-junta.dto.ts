@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsString, Allow } from 'class-validator';
+import { IsDateString, IsInt, IsNumber, IsString } from 'class-validator';
+//import { NumericType } from 'typeorm';
 
 export class CreateJuntaDto {
-  
+  /*
   @IsNotEmpty({ message: 'El campo  nominal no puede estar vacio' })
   @IsString()
   nominal: string;
@@ -10,16 +11,41 @@ export class CreateJuntaDto {
   @IsNotEmpty({ message: 'El campo  nominal1 no puede estar vacio' })
   @IsString()
   nominal1: string;
+*/
 
-  
-  @IsNotEmpty({ message: 'El campo  linea no puede estar vacio' })
+ 
+
+  //@IsInt({ message: 'inspectorID debe ser un número entero' })
+  inspectorID: number;
+
+  //@IsInt({ message: 'soldadorId debe ser un número entero' })
+  soldadorID: number;
+
+  //@IsInt({ message: 'lineaID debe ser un número entero' })
+  lineaID: number;
+
+  //@IsInt({ message: 'especificacionID debe ser un número entero' })
+  especificacionID: number;
+
+  @IsDateString(
+    {},
+    {
+      message:
+        'fecha debe ser una cadena de fecha ISO 8601 válida:ejemplo:2023-06-24T10:00:00Z',
+    },
+  )
+  fecha: string;
+
   @IsString()
-  linea: string;
+  observaciones: string;
 
-  @IsNotEmpty({ message: 'El campo  especificacion no puede estar vacio' })
-  @IsString()
-  especificacion: string;
+  @IsNumber({}, { message: 'schedule debe ser un  número entero' })
+  schedule: number;
 
+  @IsNumber({}, { message: 'proyectoId debe ser un  número entero' })
+  proyectoID: number;
+
+  /*
   @IsNotEmpty({ message: 'El campo   schedule no puede estar vacio' })
   @IsString()
   schedule: string;
@@ -49,17 +75,5 @@ export class CreateJuntaDto {
   @IsString()
   pulgadas_diametrales: string;
 
-  @Allow()
-  @IsNotEmpty({ message: 'El campo  proyectID no puede estar vacio' })
-  @IsString()
-  proyectID: string;
-  
-  @Allow()
-  @IsNotEmpty({ message: 'El campo  usuarioID no puede estar vacio' })
-  @IsString()
-  usuarioID: string;
-  
-
-
-
+ */
 }

@@ -1,14 +1,20 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JuntasService } from './juntas.service';
-import { JuntasController } from './juntas.controller';
 import { Junta } from './entities/junta.entity';
+import { JuntaController } from './junta.controller';
+import { JuntaService } from './juntas.services';
+import { Proyecto } from '../proyectos/entities/proyecto.entity';
+import { Inspector } from '../inspectores/entities/inspectore.entity';
+import { TsLinea } from '../ts_linea/entities/ts_linea.entity';
+import { TsEspecificacion } from '../ts_especificacion/entities/ts_especificacion.entity';
+import { Soldadore } from '../soldadores/entities/soldadore.entity';
+
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Junta])],
-  controllers: [JuntasController],
-  providers: [JuntasService],
-  exports: [JuntasService]
+  imports: [TypeOrmModule.forFeature([Junta, Proyecto, Inspector, TsLinea, TsEspecificacion, Soldadore])],
+  controllers: [JuntaController],
+  providers: [JuntaService],
+  exports: [JuntaService]
 })
 export class JuntasModule {}

@@ -4,12 +4,14 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
+    OneToMany,
   } from 'typeorm';
   import {
     IsNotEmpty,
     IsString,
     
   } from 'class-validator';
+  import { Junta } from '../../juntas/entities/junta.entity';
   @Entity({name: 'especificacion'})
 export class TsEspecificacion {
     @PrimaryGeneratedColumn()
@@ -30,4 +32,9 @@ export class TsEspecificacion {
     
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
+
+   // Una linea tiene muchas juntas
+   @OneToMany(() => Junta, junta => junta.lineaID)
+   juntas: Junta[];
+   
 }
