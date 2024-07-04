@@ -15,16 +15,16 @@ export class CreateJuntaDto {
 
  
 
-  //@IsInt({ message: 'inspectorID debe ser un número entero' })
+  @IsInt({ message: 'inspectorID debe ser un número entero' })
   inspectorID: number;
 
-  //@IsInt({ message: 'soldadorId debe ser un número entero' })
+  @IsInt({ message: 'soldadorId debe ser un número entero' })
   soldadorID: number;
 
-  //@IsInt({ message: 'lineaID debe ser un número entero' })
+  @IsInt({ message: 'lineaID debe ser un número entero' })
   lineaID: number;
 
-  //@IsInt({ message: 'especificacionID debe ser un número entero' })
+  @IsInt({ message: 'especificacionID debe ser un número entero' })
   especificacionID: number;
 
   @IsDateString(
@@ -42,6 +42,12 @@ export class CreateJuntaDto {
  
   @IsNumber({}, { message: 'proyectoId debe ser un  número entero' })
   proyectoID: number;
+
+  @IsInt({ message: 'tsScheduleID debe ser un número entero' })
+  tsScheduleID: number;
+
+  @IsInt({ message: 'tsScheduleID debe ser un número entero' })
+  tsTipoExtremoID: number;
 
   /*
   @IsNotEmpty({ message: 'El campo   schedule no puede estar vacio' })

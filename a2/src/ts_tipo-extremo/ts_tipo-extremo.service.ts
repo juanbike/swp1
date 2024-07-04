@@ -13,7 +13,7 @@ import { validate } from 'class-validator';
 import { Repository } from 'typeorm';
 import { CreateTsTipoExtremoDto } from './dto/create-ts_tipo-extremo.dto';
 import { UpdateTsTipoExtremoDto } from './dto/update-ts_tipo-extremo.dto';
-import { TsTipoExtremo } from './entities/ts_tipo-extremo.entity';
+import { TsTipoExtremo } from '../ts_tipo-extremo/entities/ts_tipoExtremo.entity';
 
 import * as XLSX from 'xlsx';
 import * as fs from 'fs';

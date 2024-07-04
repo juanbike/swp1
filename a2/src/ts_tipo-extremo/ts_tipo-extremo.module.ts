@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { TsTipoExtremoService } from './ts_tipo-extremo.service';
 import { TsTipoExtremoController } from './ts_tipo-extremo.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TsTipoExtremo } from './entities/ts_tipo-extremo.entity';
+import { TsTipoExtremo } from '../ts_tipo-extremo/entities/ts_tipoExtremo.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TsTipoExtremo])],

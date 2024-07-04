@@ -27,8 +27,9 @@ export class TsTipoExtremo {
     @IsNotEmpty({ message: 'El campo "tipo" no puede estar vacío' })
     @IsString({ message: 'El campo "tipo" debe ser una cadena de texto' })
     tipo: string;
-
-    
+  
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
+
+  
 }

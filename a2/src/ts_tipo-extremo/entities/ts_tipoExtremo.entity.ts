@@ -6,18 +6,19 @@ import {
   CreateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { IsNotEmpty, IsString } from 'class-validator';
 import { Junta } from '../../juntas/entities/junta.entity';
-@Entity({ name: 'Linea' })
-export class TsLinea {
+
+import { IsNotEmpty, IsString } from 'class-validator';
+@Entity({ name: 'tipoExtremo' })
+export class TsTipoExtremo {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column('text', { nullable: true })
-  @Column({ length: 80 })
-  @IsNotEmpty({ message: 'El campo "Linea" no puede estar vacío' })
-  @IsString({ message: 'El campo "Linea" debe ser una cadena de texto' })
-  linea: string;
+  @Column({ length: 30 })
+  @IsNotEmpty({ message: 'El campo "Tipo Extremo" no puede estar vacío' })
+  @IsString({ message: 'El campo "tipo Extremo" debe ser una cadena de texto' })
+  tipoExtremo: string;
 
   @Column('text', { nullable: true })
   @Column({ length: 30 })
@@ -28,7 +29,7 @@ export class TsLinea {
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
 
-  // Una linea tiene muchas juntas
-  @OneToMany(() => Junta, (junta) => junta.lineaID)
+  // Un tipoExtremo tiene muchas juntas
+  @OneToMany(() => Junta, (junta) => junta.tsTipoExtremoID)
   juntas: Junta[];
 }

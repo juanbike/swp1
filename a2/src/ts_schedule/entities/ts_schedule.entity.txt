@@ -4,14 +4,12 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
-    OneToMany,
   } from 'typeorm';
   import {
     IsNotEmpty,
     IsString,
     
   } from 'class-validator';
-  import { Junta } from '../../juntas/entities/junta.entity';
   @Entity({name: 'schedule'})
 
 export class TsSchedule {
@@ -33,8 +31,4 @@ export class TsSchedule {
     
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
-
-  // Un schedule tiene muchas juntas
-  @OneToMany(() => Junta, (junta) => junta.tsScheduleID)
-  juntas: Junta[];
 }
