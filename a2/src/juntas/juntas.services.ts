@@ -11,6 +11,7 @@ import { Soldadore } from '../soldadores/entities/soldadore.entity';
 import { CreateJuntaDto } from './dto/create-junta.dto';
 import { TsSchedule } from '../ts_schedule/entities/ts_schedule.entity';
 import { TsTipoExtremo } from '../ts_tipo-extremo/entities/ts_tipoExtremo.entity';
+import { TsMaterial } from '../ts_material/entities/ts_material.entity';
 
 @Injectable()
 export class JuntaService {
@@ -41,6 +42,9 @@ export class JuntaService {
     @InjectRepository(TsTipoExtremo)
     private readonly tsTipoExtremoRepository: Repository<TsTipoExtremo>,
 
+    @InjectRepository(TsMaterial)
+    private readonly tsMaterialRepository: Repository<TsMaterial>,
+
   ) {}
 
   async createJunta(data: CreateJuntaDto): Promise<Junta> {
@@ -66,6 +70,9 @@ export class JuntaService {
       const tsTipoExtremo = await manager.findOne(TsTipoExtremo, {
         where: { id: data.tsTipoExtremoID },
       });
+      const tsMaterial = await manager.findOne(TsMaterial, {
+        where: { id: data.tsMaterialID },
+      });
 
 
       const junta = new Junta();
@@ -76,6 +83,7 @@ export class JuntaService {
       junta.soldadorID = soldador;
       junta.tsScheduleID = tsSchedule;
       junta.tsTipoExtremoID = tsTipoExtremo
+      junta.tsMaterialID = tsMaterial;
       junta.fecha = new Date(data.fecha);
       junta.observaciones = data.observaciones;
 

@@ -7,6 +7,7 @@ import { TsEspecificacion } from '../../ts_especificacion/entities/ts_especifica
 import { Soldadore } from '../../soldadores/entities/soldadore.entity';
 import { TsSchedule } from '../../ts_schedule/entities/ts_schedule.entity';
 import { TsTipoExtremo } from '../../ts_tipo-extremo/entities/ts_tipoExtremo.entity';
+import { TsMaterial } from '../../ts_material/entities/ts_material.entity';
 
 @Entity('junta')
 export class Junta {
@@ -48,6 +49,11 @@ export class Junta {
   @ManyToOne(() => TsTipoExtremo, tsTipoExtremo => tsTipoExtremo.juntas)
   @JoinColumn({ name: 'id_tsTipoExtremo' })
   tsTipoExtremoID: TsTipoExtremo;
+
+  //TipoMaterial
+  @ManyToOne(() => TsMaterial, tsMaterial => tsMaterial.juntas)
+  @JoinColumn({ name: 'id_tsMaterial' })
+  tsMaterialID: TsMaterial;
 
   @CreateDateColumn({ name: 'create_at' })
   fecha: Date;

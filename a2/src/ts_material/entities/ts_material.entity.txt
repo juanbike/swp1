@@ -4,10 +4,7 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
-    OneToMany,
   } from 'typeorm';
-  import { Junta } from '../../juntas/entities/junta.entity';
-
   import {
     IsNotEmpty,
     IsString,
@@ -34,8 +31,4 @@ export class TsMaterial {
     
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
-
-  // Un tipoMaterial tiene muchas juntas
-  @OneToMany(() => Junta, (junta) => junta.tsMaterialID)
-  juntas: Junta[];
 }

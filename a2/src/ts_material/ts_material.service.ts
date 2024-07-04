@@ -14,7 +14,7 @@ import { Repository } from 'typeorm';
 import { CreateTsMaterialDto } from './dto/create-ts_material.dto';
 import { UpdateTsMaterialDto } from './dto/update-ts_material.dto';
 
-import { TsMaterial } from './entities/ts_material.entity';
+import { TsMaterial } from '../ts_material/entities/ts_material.entity';
 
 import * as XLSX from 'xlsx';
 import * as fs from 'fs';
@@ -74,12 +74,12 @@ export class TsMaterialService {
     
   //Elimina todos los proyectos
   async deleteAllData(): Promise<void> {
-    this.logger.log('Attempting to delete all data');
+    this.logger.log('Intentando eliminar todos los datos');
     try {
       await this.tsLineaRepository.clear();
-      this.logger.log('All data deleted successfully');
+      this.logger.log('Todos los datos eliminados con éxito');
     } catch (error) {
-      this.logger.error('Error deleting data', error.stack);
+      this.logger.error('Error eliminado los datos', error.stack);
       throw error;
     }
   }

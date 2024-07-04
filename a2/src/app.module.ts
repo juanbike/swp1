@@ -18,6 +18,8 @@ import { TsTipoMaterialModule } from './ts_tipo-material/ts_tipo-material.module
 import { TsEspecificacionModule } from './ts_especificacion/ts_especificacion.module';
 import { TsScheduleModule } from './ts_schedule/ts_schedule.module';
 import { TsMainJuntaModule } from './ts-main-junta/ts-main-junta.module';
+import { TsN0Module } from './ts_n0/ts_n0.module';
+import { TsN1Module } from './ts_n1/ts_n1.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
@@ -38,6 +40,8 @@ import { TsMainJuntaModule } from './ts-main-junta/ts-main-junta.module';
     TsEspecificacionModule,
     TsScheduleModule,
     TsMainJuntaModule,
+    TsN0Module,
+    TsN1Module,
     
   ],
   controllers: [],

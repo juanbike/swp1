@@ -49,6 +49,9 @@ export class CreateJuntaDto {
   @IsInt({ message: 'tsScheduleID debe ser un número entero' })
   tsTipoExtremoID: number;
 
+  @IsInt({ message: 'tsScheduleID debe ser un número entero' })
+  tsMaterialID: number;
+
   /*
   @IsNotEmpty({ message: 'El campo   schedule no puede estar vacio' })
   @IsString()
