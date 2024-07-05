@@ -1,19 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { IsDateString, IsInt, IsNumber, IsString } from 'class-validator';
-//import { NumericType } from 'typeorm';
+
 
 export class CreateJuntaDto {
-  /*
-  @IsNotEmpty({ message: 'El campo  nominal no puede estar vacio' })
-  @IsString()
-  nominal: string;
-
-  @IsNotEmpty({ message: 'El campo  nominal1 no puede estar vacio' })
-  @IsString()
-  nominal1: string;
-*/
-
- 
+  
 
   @IsInt({ message: 'inspectorID debe ser un número entero' })
   inspectorID: number;
@@ -40,47 +30,33 @@ export class CreateJuntaDto {
   observaciones: string;
 
  
-  @IsNumber({}, { message: 'proyectoId debe ser un  número entero' })
+  @IsNumber({}, { message: 'El número de proyecto debe ser un  número entero' })
   proyectoID: number;
 
-  @IsInt({ message: 'tsScheduleID debe ser un número entero' })
+  @IsInt({ message: 'ScheduleID debe ser un número entero' })
   tsScheduleID: number;
 
-  @IsInt({ message: 'tsScheduleID debe ser un número entero' })
+  @IsInt({ message: 'El tipo extremo debe ser un número entero' })
   tsTipoExtremoID: number;
 
-  @IsInt({ message: 'tsScheduleID debe ser un número entero' })
+  @IsInt({ message: 'El ID del material debe ser un número entero' })
   tsMaterialID: number;
 
-  /*
-  @IsNotEmpty({ message: 'El campo   schedule no puede estar vacio' })
-  @IsString()
-  schedule: string;
- 
-  @IsNotEmpty({ message: 'El campo   tipo_extremos no puede estar vacio' })
-  @IsString()
-  tipo_extremos: string;
+  @IsInt({ message: 'El ID de Nominal1 debe ser un número entero' })
+  tsN1ID: number;
 
- 
-  @IsNotEmpty({ message: 'El campo   tipo_material no puede estar vacio' })
-  @IsString()
-  tipo_material: string;
+  @IsInt({ message: 'El ID de Nominal0 debe ser un número entero' })
+  tsN0ID: number;
 
-  @IsNotEmpty({ message: 'El campo   material no puede estar vacio' })
-  @IsString()
-  material: string;
+  @IsNumber({}, { message: 'Las Pulagadas Contabilizadas debe ser un  número entero o Decimal' })
+  pulgadascon: number;
 
-  @IsNotEmpty({ message: 'El campo   diam_inch_contabilizadas no puede estar vacio' })
-  @IsString()
-  diam_inch_contabilizadas: string;
+  @IsNumber({}, { message: 'El Factor Pulagadas Diametrales debe ser un  número entero o Decimal' })
+  facpuldia: number;
 
-  @IsNotEmpty({ message: 'El campo  factor_pulgadas_diametrales no puede estar vacio' })
-  @IsString()
-  factor_pulgadas_diametrales: string;
+  @IsNumber({}, { message: 'Las Pulagadas Diametrales debe ser un  número entero o Decimal' }) 
+  pulgdia: number;
 
-  @IsNotEmpty({ message: 'El campo  pulgadas_diametrales no puede estar vacio' })
-  @IsString()
-  pulgadas_diametrales: string;
 
- */
+  
 }

@@ -12,10 +12,12 @@ import { Soldadore } from '../soldadores/entities/soldadore.entity';
 import { TsSchedule } from '../ts_schedule/entities/ts_schedule.entity';
 import { TsTipoExtremo } from '../ts_tipo-extremo/entities/ts_tipoExtremo.entity';
 import { TsMaterial } from '../ts_material/entities/ts_material.entity';
+import { TsN1 } from '../ts_n1/entities/ts_n1.entity';
+import { TsN0 } from '../ts_n0/entities/ts_n0.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Junta, Proyecto, Inspector, TsLinea, TsEspecificacion, Soldadore, TsSchedule, TsTipoExtremo, TsMaterial])],
+  imports: [TypeOrmModule.forFeature([Junta, Proyecto, Inspector, TsLinea, TsEspecificacion, Soldadore, TsSchedule, TsTipoExtremo, TsMaterial, TsN1, TsN0])],
   controllers: [JuntaController],
   providers: [JuntaService],
   exports: [JuntaService]

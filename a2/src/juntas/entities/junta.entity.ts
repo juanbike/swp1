@@ -8,6 +8,8 @@ import { Soldadore } from '../../soldadores/entities/soldadore.entity';
 import { TsSchedule } from '../../ts_schedule/entities/ts_schedule.entity';
 import { TsTipoExtremo } from '../../ts_tipo-extremo/entities/ts_tipoExtremo.entity';
 import { TsMaterial } from '../../ts_material/entities/ts_material.entity';
+import { TsN1 } from '../../ts_n1/entities/ts_n1.entity';
+import { TsN0 } from '../../ts_n0/entities/ts_n0.entity';
 
 @Entity('junta')
 export class Junta {
@@ -55,27 +57,31 @@ export class Junta {
   @JoinColumn({ name: 'id_tsMaterial' })
   tsMaterialID: TsMaterial;
 
+  //N1
+  @ManyToOne(() => TsN1, tsN1 => tsN1.juntas)
+  @JoinColumn({ name: 'id_tsN1' })
+  tsN1ID: TsN1;
+
+  //N0
+  @ManyToOne(() => TsN0, tsN0 => tsN0.juntas)
+  @JoinColumn({ name: 'id_tsN0' })
+  tsN0ID: TsN0;
+
   @CreateDateColumn({ name: 'create_at' })
   fecha: Date;
 
-  @Column({ name: 'observaciones', type: 'text' })
+  @Column({ name: 'observaciones', type: 'text', nullable: true })
   observaciones: string;
 
-/*
-  @ManyToOne(() => Proyecto, proyecto => proyecto.tipo)
-  @JoinColumn({ name: 'id_proyecto' })
-  proyecto: Proyecto;
+  @Column({ name: 'pulgCont',type:'decimal', precision: 6, scale: 2,  nullable: false })
+  pulgadascon: number;
 
-  @ManyToOne(() => Inspectores, inspector => inspector.juntas)
-  @JoinColumn({ name: 'id_inspector' })
-  inspector: Inspectores;
+  @Column({ name: 'factPulgDiame',type:'decimal', precision: 6, scale: 2,  nullable: false })
+  facpuldia: number;
 
-  @Column({ name: 'fecha', type: 'timestamp' })
-  fecha: Date;
+  @Column({ name: 'PulgDiame',type:'decimal', precision: 6, scale: 2,  nullable: false })
+  pulgdia: number;
 
-  @Column({ name: 'observaciones', type: 'text' })
-  observaciones: string;
- */
 
 
 }

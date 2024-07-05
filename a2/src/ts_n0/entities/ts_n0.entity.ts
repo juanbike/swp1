@@ -3,10 +3,9 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
-    //CreateDateColumn,
-    //OneToMany,
+   OneToMany,
   } from 'typeorm';
-  //import { Junta } from '../../juntas/entities/junta.entity';
+ import { Junta } from '../../juntas/entities/junta.entity';
 
   import {
     IsNotEmpty,
@@ -22,4 +21,11 @@ export class TsN0 {
     @IsString({ message: 'El campo "N0" debe ser una cadena de texto' })
     @Column({ name: 'nominal0', length: 10, nullable: false })
     n0: string;
+
+   //un n0 tiene muchas juntas
+   @OneToMany(() => Junta, (junta) => junta.tsN0ID)
+   juntas: Junta[];
+ 
+
+
 }
