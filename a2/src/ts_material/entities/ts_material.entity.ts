@@ -35,7 +35,7 @@ export class TsMaterial {
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
 
-  // Un tipoMaterial tiene muchas juntas
+  // Un Material tiene muchas juntas
   @OneToMany(() => Junta, (junta) => junta.tsMaterialID)
   juntas: Junta[];
 }

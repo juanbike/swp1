@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Connection } from 'typeorm';
 import { Junta } from './entities/junta.entity';
@@ -12,8 +12,12 @@ import { CreateJuntaDto } from './dto/create-junta.dto';
 import { TsSchedule } from '../ts_schedule/entities/ts_schedule.entity';
 import { TsTipoExtremo } from '../ts_tipo-extremo/entities/ts_tipoExtremo.entity';
 import { TsMaterial } from '../ts_material/entities/ts_material.entity';
+import { TsTipoMaterial } from '../ts_tipo-material/entities/ts_tipo-material.entity';
 import { TsN1 } from '../ts_n1/entities/ts_n1.entity';
 import { TsN0 } from '../ts_n0/entities/ts_n0.entity';
+
+
+
 
 @Injectable()
 export class JuntaService {
@@ -46,6 +50,9 @@ export class JuntaService {
 
     @InjectRepository(TsMaterial)
     private readonly tsMaterialRepository: Repository<TsMaterial>,
+
+    @InjectRepository(TsTipoMaterial)
+    private readonly tsTipoMaterialRepository: Repository<TsTipoMaterial>,
 
     @InjectRepository(TsN1)
     private readonly tsN1Repository: Repository<TsN1>,
@@ -112,6 +119,13 @@ export class JuntaService {
       if (!tsMaterial) {
         throw new NotFoundException('tsMaterial no encontrado');
       }
+      //tsTipoMaterial
+      const tsTipoMaterial = await manager.findOne(TsTipoMaterial, {
+        where: { id: data.tsTipoMaterialID },
+      });
+      if (!tsTipoMaterial) {
+        throw new NotFoundException('tsTipoMaterial no encontrado');
+      }
       //tsN1
       const tsN1 = await manager.findOne(TsN1, {
         where: { id: data.tsN1ID },
@@ -137,6 +151,7 @@ export class JuntaService {
       junta.tsScheduleID = tsSchedule;
       junta.tsTipoExtremoID = tsTipoExtremo
       junta.tsMaterialID = tsMaterial;
+      junta.tsTipoMaterialID = tsTipoMaterial;
       junta.tsN1ID = tsN1;
       junta.tsN0ID = tsN0;
       junta.fecha = new Date(data.fecha);
@@ -147,7 +162,16 @@ export class JuntaService {
 
       return await manager.save(junta);
     });
-
-   
+  
   }
+
+ 
+
+
+
+
+
+
+
+
 }

@@ -42,6 +42,9 @@ export class CreateJuntaDto {
   @IsInt({ message: 'El ID del material debe ser un número entero' })
   tsMaterialID: number;
 
+  @IsInt({ message: 'El ID del tipo de material debe ser un número entero' })
+  tsTipoMaterialID: number;
+
   @IsInt({ message: 'El ID de Nominal1 debe ser un número entero' })
   tsN1ID: number;
 
