@@ -17,11 +17,13 @@ export class Junta {
   @PrimaryGeneratedColumn('increment', { name: 'id_junta' })
   id: number;
 
+  //Proyecto
   @ManyToOne(() => Proyecto, proyecto => proyecto.juntas)
   @JoinColumn({ name: 'id_proyecto' })
   proyectoID: Proyecto;
 
   
+  //Inspector
   @ManyToOne(() => Inspector, inspector => inspector.juntas)
   @JoinColumn({ name: 'id_inspector' })
   inspectorID: Inspector;

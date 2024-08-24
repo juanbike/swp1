@@ -20,8 +20,8 @@ export class TsN1 {
 
     @IsNotEmpty({ message: 'El campo "N1" no puede estar vacío' })
     @IsString({ message: 'El campo "N1" debe ser una cadena de texto' })
-    @Column({ name: 'nominal0', length: 10, nullable: false })
-    n0: string;1
+    @Column({ name: 'nominal1', length: 10, nullable: false })
+    n1: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     fecha: Date;

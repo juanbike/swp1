@@ -3,8 +3,7 @@ import {
   Controller,
   Get,
   Post,
-  Body,
-  Patch,
+  
   Param,
   Delete,
   HttpException,
@@ -14,8 +13,8 @@ import {
   Logger
 } from '@nestjs/common';
 import { TsN0Service } from './ts_n0.service';
-import { CreateTsN0Dto } from './dto/create-ts_n0.dto';
-import { UpdateTsN0Dto } from './dto/update-ts_n0.dto';
+//import { CreateTsN0Dto } from './dto/create-ts_n0.dto';
+//import { UpdateTsN0Dto } from './dto/update-ts_n0.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -26,10 +25,7 @@ export class TsN0Controller {
   private readonly logger = new Logger(TsN0.name );
   constructor(private readonly tsN0Service: TsN0Service) {}
 
-  @Post()
-  create(@Body() createTsN0Dto: CreateTsN0Dto) {
-    return this.tsN0Service.create(createTsN0Dto);
-  }
+  
 
   @Get()
   findAll() {
@@ -41,10 +37,7 @@ export class TsN0Controller {
     return this.tsN0Service.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTsN0Dto: UpdateTsN0Dto) {
-    return this.tsN0Service.update(+id, updateTsN0Dto);
-  }
+  
 
   @Delete(':id')
   remove(@Param('id') id: string) {

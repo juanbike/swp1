@@ -21,7 +21,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
-@Controller('api/schedule')
+@Controller('api/tsSchedule')
 export class TsScheduleController {
   private readonly logger = new Logger(TsScheduleController.name);
   constructor(private readonly tsScheduleService: TsScheduleService) {}

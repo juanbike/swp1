@@ -32,8 +32,9 @@ export class TsMaterialService {
     return 'This action adds a new tsMaterial';
   }
 
-  findAll() {
-    return `This action returns all tsMaterial`;
+  //Recupeta todas los tsMaterial
+  async findAll(): Promise<TsMaterial[]> {
+    return await this.tsLineaRepository.find();
   }
 
   findOne(id: number) {

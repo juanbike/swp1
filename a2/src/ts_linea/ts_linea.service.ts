@@ -37,8 +37,9 @@ export class TsLineaService {
     return 'This action adds a new tsLinea';
   }
 
-  findAll() {
-    return `This action returns all tsLinea`;
+  //Recuperamos todas las lineas
+  async findAll(): Promise<TsLinea[]> {
+    return await this.tsLineaRepository.find();
   }
 
   findOne(id: number) {

@@ -30,8 +30,9 @@ export class TsTipoMaterialService {
     return 'This action adds a new tsTipoMaterial';
   }
 
-  findAll() {
-    return `This action returns all tsTipoMaterial`;
+  //Encutra todos los tipo Material
+  async findAll(): Promise<TsTipoMaterial[]> {
+    return await this.tsTipoMaterialRepository.find();
   }
 
   findOne(id: number) {

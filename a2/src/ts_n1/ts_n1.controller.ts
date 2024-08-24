@@ -2,37 +2,35 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
-  Patch,
+ 
   Param,
   Delete,
   HttpException,
   HttpStatus,
   UseInterceptors,
   UploadedFile,
-  Logger
+  Post,
+  
 } from '@nestjs/common';
 
-import { TsN1Service } from './ts_n1.service';
-import { CreateTsN1Dto } from './dto/create-ts_n1.dto';
-import { UpdateTsN1Dto } from './dto/update-ts_n1.dto';
+//import { CreateTsN1Dto } from './dto/create-ts_n1.dto';
+//import { UpdateTsN1Dto } from './dto/update-ts_n1.dto';
 
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { TsN1 } from '../ts_n1/entities/ts_n1.entity';
+import { TsN1Service } from './ts_n1.service';
+
+
+
 
 
 @Controller('/api/ts-n1')
 export class TsN1Controller {
-  private readonly logger = new Logger(TsN1.name );
+  
   constructor(private readonly tsN1Service: TsN1Service) {}
 
-  @Post()
-  create(@Body() createTsN1Dto: CreateTsN1Dto) {
-    return this.tsN1Service.create(createTsN1Dto);
-  }
+  
 
   @Get()
   findAll() {
@@ -44,10 +42,7 @@ export class TsN1Controller {
     return this.tsN1Service.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTsN1Dto: UpdateTsN1Dto) {
-    return this.tsN1Service.update(+id, updateTsN1Dto);
-  }
+  
 
   @Delete(':id')
   remove(@Param('id') id: string) {
@@ -86,13 +81,13 @@ export class TsN1Controller {
 
   @Delete()
   async deleteAllData() {
-    this.logger.log('Received request to delete all data');
+    
     try {
       await this.tsN1Service.deleteAllData();
-      this.logger.log('All data deleted successfully');
+      
       return { message: 'Todos los datos han sido eliminados' };
     } catch (error) {
-      this.logger.error('Error deleting all data', error.stack);
+      
       throw new HttpException({
         status: HttpStatus.INTERNAL_SERVER_ERROR,
         error: 'No se pudieron eliminar los datos',

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Logger } from '@nestjs/common';
-import { CreateTsN1Dto } from './dto/create-ts_n1.dto';
-import { UpdateTsN1Dto } from './dto/update-ts_n1.dto';
+//import { CreateTsN1Dto } from './dto/create-ts_n1.dto';
+//import { UpdateTsN1Dto } from './dto/update-ts_n1.dto';
 import { TsN1 } from '../ts_n1/entities/ts_n1.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,21 +19,19 @@ export class TsN1Service {
     @InjectRepository(TsN1)
     private readonly tsN1Repository: Repository<TsN1>,
   ) {}
-  create(createTsN1Dto: CreateTsN1Dto) {
-    return 'This action adds a new tsN1';
-  }
+  
+  
 
-  findAll() {
-    return `This action returns all tsN1`;
+  //Encuentra todos los tsN1
+  async findAll(): Promise<TsN1[]> {
+    return await this.tsN1Repository.find();
   }
 
   findOne(id: number) {
     return `This action returns a #${id} tsN1`;
   }
 
-  update(id: number, updateTsN1Dto: UpdateTsN1Dto) {
-    return `This action updates a #${id} tsN1`;
-  }
+  
 
   remove(id: number) {
     return `This action removes a #${id} tsN1`;
@@ -53,9 +51,9 @@ async readExcelAndSave(filePath: string): Promise<void> { //-1
   //Procesamiento y Guardado de Datos
   for (const row of sheet) { //-Itera sobre cada fila del array sheet.
     this.logger.log('Procesando fila:'+ row['linea'] + ' -'+ row['tipo']);
-    const tsN0 = new TsN1(); 
-    tsN0.n0 = row['n1'];
-    await this.tsN1Repository.save(tsN0); 
+    const tsN1 = new TsN1(); 
+    tsN1.n1 = row['n1'];
+    await this.tsN1Repository.save(tsN1); 
   }
   // Eliminar el archivo después de procesarlo
   fs.unlinkSync(resolvedPath); //-7

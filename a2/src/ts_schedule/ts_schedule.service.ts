@@ -33,8 +33,9 @@ export class TsScheduleService {
     return 'This action adds a new tsSchedule';
   }
 
-  findAll() {
-    return `This action returns all tsSchedule`;
+  //Encuentra todos los schedule
+  async findAll(): Promise<TsSchedule[]> {
+    return await this.tsScheduleRepository.find();
   }
 
   findOne(id: number) {

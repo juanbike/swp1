@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Logger } from '@nestjs/common';
-import { CreateTsN0Dto } from './dto/create-ts_n0.dto';
-import { UpdateTsN0Dto } from './dto/update-ts_n0.dto';
+//import { CreateTsN0Dto } from './dto/create-ts_n0.dto';
+//import { UpdateTsN0Dto } from './dto/update-ts_n0.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -20,21 +20,18 @@ export class TsN0Service {
     private readonly tsN0Repository: Repository<TsN0>,
   ) {}
 
-  create(createTsN0Dto: CreateTsN0Dto) {
-    return 'This action adds a new tsN0';
-  }
+  
 
-  findAll() {
-    return `This action returns all tsN0`;
+ //Recupera todos los tsN0
+ async findAll(): Promise<TsN0[]> {
+    return await this.tsN0Repository.find();
   }
 
   findOne(id: number) {
     return `This action returns a #${id} tsN0`;
   }
 
-  update(id: number, updateTsN0Dto: UpdateTsN0Dto) {
-    return `This action updates a #${id} tsN0`;
-  }
+  
 
   remove(id: number) {
     return `This action removes a #${id} tsN0`;

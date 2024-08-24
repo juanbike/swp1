@@ -55,6 +55,23 @@ export class ProyectosService {
     return await this.proyectosRepository.find();
   }
 
+  //Recuperamos todos los proyectos con sus juntas e inspectores
+  /*
+  async getProyectosConJuntas() {
+    return this.proyectosRepository.find({
+      relations: ['juntas', 'juntas.inspectores'],
+      select: ['id', 'proyecto', 'cliente', 'titulo','revision', 'tipo', 'elaboradoPor' ],
+      
+      order: {
+        id: 'ASC',
+      }
+    });
+  }
+
+*/
+
+
+
   //Recuperamos un proyecto por su Id
 
   async findById(id: number): Promise<Proyecto> {

@@ -36,10 +36,12 @@ export class ProyectosController {
 
   //Recuperamos todos los proyectos
 
+  
   @Get()
   findAll() {
     return this.proyectosService.findAll();
   }
+
 
   //Recuperamos un proyecto por su Id
   @Get(':id')
@@ -72,6 +74,17 @@ export class ProyectosController {
   }
 
 */
+
+
+//Recuperamos todos los proyectos con sus juntas e inspectores
+/*
+@Get()
+async getProyectosConJuntas() {
+  return await this.proyectosService.getProyectosConJuntas();
+}
+*/
+
+
 
 @Post('upload')
 @UseInterceptors(FileInterceptor('File', {

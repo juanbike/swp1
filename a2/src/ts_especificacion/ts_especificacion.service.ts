@@ -30,8 +30,9 @@ export class TsEspecificacionService {
     return 'This action adds a new tsEspecificacion';
   }
 
-  findAll() {
-    return `This action returns all tsEspecificacion`;
+ //Recuperamos todas las tsEspecificacion
+ async findAll(): Promise<TsEspecificacion[]> {
+    return await this.tsEspecificacion.find();
   }
 
   findOne(id: number) {

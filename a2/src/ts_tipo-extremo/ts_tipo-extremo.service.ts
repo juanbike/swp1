@@ -33,8 +33,9 @@ export class TsTipoExtremoService {
     return 'This action adds a new tsTipoExtremo';
   }
 
-  findAll() {
-    return `This action returns all tsTipoExtremo`;
+ //Encuentra todos los tipoExtremo
+ async findAll(): Promise<TsTipoExtremo[]> {
+    return await this.tsTipoExtremoRepository.find();
   }
 
   findOne(id: number) {

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Connection } from 'typeorm';
+import { Repository, Connection} from 'typeorm';
 import { Junta } from './entities/junta.entity';
 import { Proyecto } from '../proyectos/entities/proyecto.entity';
 import { Inspector } from '../inspectores/entities/inspectore.entity';
@@ -162,10 +162,144 @@ export class JuntaService {
 
       return await manager.save(junta);
     });
-  
   }
 
+
+    //Recupera las juntas por ProyectoID
+    async getJuntasByProyectoId(proyectoId: number): Promise<Junta[]> {
+      console.log('proyectoId recibido en el servicio:', proyectoId);
+  if (!proyectoId) {
+    throw new Error('El proyectoId es undefined');
+  }
+      return this.juntaRepository.find({
+        where: { proyectoID: { id: proyectoId } },
+        relations: ['proyectoID', 'inspectorID', 'lineaID', 'soldadorID'],
+        select: ['id', 'proyectoID', 'inspectorID', 'lineaID', 'especificacionID','soldadorID'], 
+        order: {
+          id: 'ASC',
+        }
+      });
+    }
+  
+  
+    //Recupera las juntas por SoldadorID
+    async getJuntasBySoldadorId(soldadorId: number): Promise<Junta[]> {
+      console.log('soldadorId recibido en el servicio:', soldadorId);
+  if (!soldadorId) {
+    throw new Error('El soldadorId es undefined');
+  }
+      return this.juntaRepository.find({
+        where: { soldadorID: { id: soldadorId } },
+        relations: [ 'lineaID', 'especificacionID', 'tsScheduleID', 'tsTipoExtremoID', 'tsMaterialID', 'tsTipoMaterialID'], //6
+        //select: ['id', 'proyectoID', 'inspectorID', 'lineaID.linea', 'especificacionID','soldadorID'], //7
+               order: {
+          id: 'ASC',
+        }
+      });
+    }
+
+    /*
+    Entiendo, aquí te explico el código que me proporcionaste:
+
+Este código es una función asíncrona llamada `getJuntasBySoldadorId` que pertenece a un servicio. La función recibe un parámetro `soldadorId` de tipo `number` y devuelve una promesa que resuelve a
+ un arreglo de objetos `Junta`.
+
+Veamos el código paso a paso:
+
+1. La función comienza imprimiendo en la consola el valor del `soldadorId` recibido.
+2. Luego, se verifica si el `soldadorId` es `undefined`. Si es así, se lanza un error con el mensaje "El soldadorId es undefined".
+3. Si el `soldadorId` es válido, se utiliza el repositorio `juntaRepository` para realizar una consulta a la base de datos.
+4. La consulta se realiza utilizando el método `find()` del repositorio, el cual devuelve un arreglo de objetos `Junta`.
+5. En la consulta, se filtran los registros donde el `soldadorID.id` coincide con el `soldadorId` proporcionado.
+6. Se solicita que se carguen las relaciones con las entidades `proyectoID`, `inspectorID`, `lineaID` y `especificacionID`.
+7. Se seleccionan los campos `id`, `proyectoID`, `inspectorID`, `lineaID`, `especificacionID` y `soldadorID` de los registros.
+8. Finalmente, se ordena el resultado por el campo `id` en orden ascendente.
+
+En resumen, esta función recupera todas las juntas (registros) de la base de datos que están asociadas a un soldador específico, incluyendo información de las entidades relacionadas, y las devuelve en un arreglo.
+    */
+
+
+
+
+
+
+    //Recupera las juntas por InspectorID
+    async getJuntasByInspectorId(inspectorId: number): Promise<Junta[]> {
+      console.log('inspectorId recibido en el servicio:', inspectorId);
+  if (!inspectorId) {
+    throw new Error('El inspectorId es undefined');
+  }
+      return this.juntaRepository.find({
+        where: { inspectorID: { id: inspectorId } },
+        relations: ['proyectoID', 'lineaID', 'especificacionID','soldadorID'],
+        select: ['id', 'proyectoID', 'inspectorID', 'lineaID', 'especificacionID','soldadorID'],
+        order: {
+          id: 'ASC',
+        }
+      });
+    }
  
+    //hacer una consulta por soldador que solo muestre los materiales consumidos: linea, especificacion, schedule, tipo extremo, tipo material, material
+    // y que lo ordene por tipo material y lo totalice por tipo material
+    async getMaterialesConsumidosPorSoldador(soldadorId: number) {
+      const materiales = await this.juntaRepository.createQueryBuilder('junta')
+        .leftJoinAndSelect('junta.proyectoID','proyecto')
+        .leftJoinAndSelect('junta.inspectorID','inspector')
+        .leftJoinAndSelect('junta.lineaID','linea')
+        .leftJoinAndSelect('junta.especificacionID', 'especificacion')
+        .leftJoinAndSelect('junta.soldadorID','soldador')
+        .leftJoinAndSelect('junta.tsScheduleID', 'schedule') // Asume que existe una relación tsScheduleID
+        .leftJoinAndSelect('junta.tsTipoExtremoID', 'tipoExtremo') // Asume que existe una relación tsTipoExtremoID
+        .leftJoinAndSelect('junta.tsMaterialID', 'material') // Asume que existe una relación tsMaterialID
+        //.leftJoinAndSelect('junta.tsTipoMaterialID', 'tipoMaterial')
+        .leftJoinAndSelect('junta.tsN0ID', 'N0')// Asume que existe una relación tsN0ID
+        .leftJoinAndSelect('junta.tsN1ID', 'N1') // Asume que existe una relación tsN1ID
+        .where('junta.soldadorID = :soldadorId', { soldadorId })
+        .select([
+          //'tipoMaterial.nombre AS tipoMaterialNombre',
+          'soldador.nombre AS soldadorNombre',
+          'soldador.apellido AS soldadorApellido',
+          'soldador.telefono AS soldadorTelefono',
+          'linea.linea AS lineaNombre',
+          'schedule.schedule AS scheduleNombre',
+          'schedule.tipo AS scheduleTipo',
+          'tipoExtremo.tipoExtremo AS tipoExtremoNombre',
+          'tipoExtremo.tipo AS tipoExtremoTipo',
+          'material.material AS materialNombre',
+          'material.tipo AS materialTipo',
+          
+        ])
+        .orderBy('material.material', 'ASC')
+        .getRawMany();
+  
+      // Agrupar por Material y totalizar
+      const totalizados = materiales.reduce((acc, curr) => {
+        const { materialNombre, materialTipo,soldadorNombre, soldadorApellido, soldadorTelefono, lineaNombre, scheduleNombre, scheduleTipo ,tipoExtremoNombre, tipoExtremoTipo  } = curr;
+        if (!acc[materialNombre]) {
+          acc[materialNombre] = {
+            materialNombre,
+            total: 0,
+            detalles: []
+          };
+        }
+        acc[materialNombre].total += 1;
+        acc[materialNombre].detalles.push({
+          materialNombre,
+          materialTipo,
+          lineaNombre,
+          soldadorNombre,
+          soldadorApellido,
+          soldadorTelefono,
+          scheduleNombre,
+          scheduleTipo,
+          tipoExtremoNombre,
+          tipoExtremoTipo,
+        });
+        return acc;
+      }, {});
+      console.log('totalizados:', totalizados);
+      return totalizados;
+    }
 
 
 
@@ -174,4 +308,4 @@ export class JuntaService {
 
 
 
-}
+}// Fin de la clase
