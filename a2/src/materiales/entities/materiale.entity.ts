@@ -14,22 +14,22 @@ export class Materiales {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'tipo', length: 25, nullable: false })
+  @Column({ name: 'tipo', length: 30, nullable: false })
   tipo: string;
 
   @Column({ name: 'colada', length: 8, nullable: false })
   colada: string;
 
-  @Column({ name: 'schedule', length: 2, nullable: false })
+  @Column({ name: 'schedule', length: 8, nullable: false })
   schedule: string;
 
-  @Column({ name: 'textremo', length: 12, nullable: false })
+  @Column({ name: 'textremo', length: 30, nullable: false })
   textremo: string;
 
-  @Column({ name: 'tmaterial', length: 20, nullable: false })
+  @Column({ name: 'tmaterial', length: 30, nullable: false })
   tmaterial: string;
 
-  @Column({ name: 'material', length: 25, nullable: false })
+  @Column({ name: 'material', length: 30, nullable: false })
   material: string;
 
   @CreateDateColumn({ name: 'create_at' })
