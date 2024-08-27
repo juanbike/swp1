@@ -60,7 +60,7 @@ async readExcelAndSave(filePath: string): Promise<void> { //-1
 
   //Procesamiento y Guardado de Datos
   for (const row of sheet) { //-Itera sobre cada fila del array sheet.
-    this.logger.log('Procesando fila:'+ row['linea'] + ' -'+ row['tipo']);
+    this.logger.log('Procesando fila:'+ row['especificacion'] + ' -'+ row['tipo']);
     const tsEspecificacion = new TsEspecificacion(); 
     tsEspecificacion.especificacion = row['especificacion'];
     tsEspecificacion.tipo = row['tipo']; 
