@@ -50,7 +50,7 @@ async readExcelAndSave(filePath: string): Promise<void> { //-1
 
   //Procesamiento y Guardado de Datos
   for (const row of sheet) { //-Itera sobre cada fila del array sheet.
-    this.logger.log('Procesando fila:'+ row['linea'] + ' -'+ row['tipo']);
+    this.logger.log('Procesando fila:'+ row['n0']);
     const tsN0 = new TsN0(); 
     tsN0.n0 = row['n0'];
     await this.tsN0Repository.save(tsN0); 
