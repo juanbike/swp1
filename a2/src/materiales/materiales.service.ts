@@ -1,13 +1,18 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateMaterialeDto } from './dto/create-materiale.dto';
 
 import { Materiales } from './entities/materiale.entity';
 
+import * as XLSX from 'xlsx';
+import * as fs from 'fs';
+import * as path from 'path';
+
 @Injectable()
 export class MaterialesService {
+  private readonly logger = new Logger(Materiales.name);
 
 
   constructor(
@@ -60,6 +65,38 @@ export class MaterialesService {
         return this.materialesRepository.save(material);
       }
     
+
+
+      async readExcelAndSave(filePath: string): Promise<void> { //-1
+        const resolvedPath = path.resolve(filePath); //-2
+        this.logger.log('Leyendo archivo:'+ resolvedPath);
+        if (typeof resolvedPath !== 'string' || !fs.existsSync(resolvedPath)) {
+          throw new Error('Invalid file path');
+        } //-3
+        const workbook = XLSX.readFile(filePath); //-4
+        const sheetName = workbook.SheetNames[0]; //-5
+        const sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);//-6
+    
+        //Procesamiento y Guardado de Datos
+        for (const row of sheet) { //-Itera sobre cada fila del array sheet.
+          const materiales = new Materiales(); 
+          materiales.tipo = row['tipo'];
+          materiales.colada = row['colada'];
+          materiales.schedule = row['schedule'];
+          materiales.textremo = row['textremo'];
+          materiales.tmaterial = row['tmaterial'];
+          materiales.material = row['material'];
+          await this.materialesRepository.save(materiales);
+          this.logger.log('Guardando fila:'+ row['linea'] + ' -'+ row['tipo']);
+        }
+        // Eliminar el archivo después de procesarlo
+        fs.unlinkSync(resolvedPath); //-7
+      }
+
+
+
+
+
 
   // Eliminar un MATERIAL por su Id
 
